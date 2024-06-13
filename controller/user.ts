@@ -1,14 +1,33 @@
 import { type Request, type Response } from "express";
 import users from "../data/users";
 
+type ReqQuery = {
+  page: string | undefined;
+  limit: string | undefined;
+};
+
 export default {
-  getAll: (req: Request, res: Response) => {
+  getAll: (req: Request<{}, {}, {}, ReqQuery>, res: Response) => {
     try {
+      const page = parseInt(req.query.page ?? "1")
+      const limit = parseInt(req.query.limit ?? "6")
+
+      const total = users.length;
+      const totalPage = Math.ceil(total / limit);
+
+      const start = 0 + (limit * (page - 1))
+
+      const data = users.slice(start, start + limit )
+
       res.json({
-        data: users,
+        page: page,
+        limit: limit,
+        total: total,
+        total_page: totalPage,
+        data: data,
       });
     } catch (error) {
-      res.status(500)
+      res.status(500);
     }
   },
 
