@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "bun --watch run index.ts",
-    "build": "bun build ./index.ts --outdir ./out --target=bun"
+    "build": "bun build ./index.ts --outdir ./dist --target=bun"
   },
   "devDependencies": {
     "@types/bun": "latest",
@@ -14,7 +14,6 @@
     "typescript": "^5.0.0"
   },
   "dependencies": {
-    "ejs": "^3.1.10",
     "express": "^4.19.2",
     "zod": "^3.23.8"
   }
