@@ -4,8 +4,8 @@
   "type": "module",
   "scripts": {
     "dev": "bun --watch run index.ts",
-    "build": "bun build ./index.ts --outdir ./api --target=bun",
-    "start" : "bun index.ts"
+    "build": "bun build index.ts --outdir ./api --target=node",
+    "start": "bun ./api/index.js"
   },
   "devDependencies": {
     "@types/bun": "latest",
