@@ -11,13 +11,13 @@ const authController = {
 
       if (!result.success) {
         return res.status(400).json({
-          message: "Login gagal",
+          message: "Login failed",
           error: mapValidationErrors(result.error.issues),
         });
       }
 
       res.json({
-        message: "Login berhasil",
+        message: "Login successful",
         token: "--token--",
       });
     } catch (error) {
@@ -35,13 +35,13 @@ const authController = {
 
       if (!result.success) {
         return res.status(400).json({
-          message : "Registrasi gagal",
+          message: "Registration failed",
           error : mapValidationErrors(result.error.issues)
         })
       }
 
       res.json({
-        message : "Registrasi berhasil",
+        message: "Registration successful",
         token : "--token--"
       })
     } catch (error) {

@@ -39,7 +39,7 @@ export default {
 
       if (user == undefined) {
         return res.status(404).json({
-          message: "Data tidak ditemukan",
+          message: "User not found",
         });
       }
 

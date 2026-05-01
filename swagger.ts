@@ -46,7 +46,7 @@ const options: swaggerJSDoc.Options = {
         AuthResponse: {
           type: "object",
           properties: {
-            message: { type: "string", example: "Login berhasil" },
+            message: { type: "string", example: "Login successful" },
             token: { type: "string", example: "--token--" },
           },
         },
@@ -93,7 +93,7 @@ const options: swaggerJSDoc.Options = {
         ValidationError: {
           type: "object",
           properties: {
-            message: { type: "string", example: "Login gagal" },
+            message: { type: "string", example: "Login failed" },
             error: {
               type: "object",
               additionalProperties: {
@@ -107,7 +107,7 @@ const options: swaggerJSDoc.Options = {
         NotFoundError: {
           type: "object",
           properties: {
-            message: { type: "string", example: "Data tidak ditemukan" },
+            message: { type: "string", example: "User not found" },
           },
         },
         UnauthorizedError: {
@@ -139,7 +139,7 @@ const options: swaggerJSDoc.Options = {
               content: {
                 "application/json": {
                   schema: { $ref: "#/components/schemas/AuthResponse" },
-                  example: { message: "Login berhasil", token: "--token--" },
+                  example: { message: "Login successful", token: "--token--" },
                 },
               },
             },
@@ -174,7 +174,7 @@ const options: swaggerJSDoc.Options = {
               content: {
                 "application/json": {
                   schema: { $ref: "#/components/schemas/AuthResponse" },
-                  example: { message: "Registrasi berhasil", token: "--token--" },
+                  example: { message: "Registration successful", token: "--token--" },
                 },
               },
             },
