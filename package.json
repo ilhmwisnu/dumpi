@@ -1,10 +1,9 @@
 {
   "name": "dumpi",
   "module": "index.ts",
-  "type": "module",
   "scripts": {
     "dev": "bun --watch run index.ts",
-    "build": "bun build index.ts --outdir ./api --target=node",
+    "build": "bun build index.ts --outdir ./api --target=node --format=cjs",
     "start": "bun ./api/index.js"
   },
   "devDependencies": {
