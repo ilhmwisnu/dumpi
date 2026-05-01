@@ -116,6 +116,29 @@ const options: swaggerJSDoc.Options = {
             error: { type: "string", example: "Unauthorized" },
           },
         },
+        SuccessMessage: {
+          type: "object",
+          properties: {
+            message: { type: "string", example: "User deleted successfully" },
+          },
+        },
+        UserCreateRequest: {
+          type: "object",
+          required: ["name", "email"],
+          properties: {
+            name: { type: "string", example: "Alice Walker" },
+            email: { type: "string", format: "email", example: "alice.walker@example.com" },
+            avatar: { type: "string", format: "uri", example: "https://picsum.photos/id/13/200/200" },
+          },
+        },
+        UserUpdateRequest: {
+          type: "object",
+          properties: {
+            name: { type: "string", example: "Alice Walker" },
+            email: { type: "string", format: "email", example: "alice.walker@example.com" },
+            avatar: { type: "string", format: "uri", example: "https://picsum.photos/id/13/200/200" },
+          },
+        },
       },
     },
     paths: {
@@ -220,6 +243,37 @@ const options: swaggerJSDoc.Options = {
             },
           },
         },
+        post: {
+          tags: ["Users"],
+          summary: "Create a user",
+          description: "Simulates creating a user and returns what the new record would look like. Data is not persisted — the list always resets on server restart.",
+          requestBody: {
+            required: true,
+            content: {
+              "application/json": {
+                schema: { $ref: "#/components/schemas/UserCreateRequest" },
+              },
+            },
+          },
+          responses: {
+            201: {
+              description: "User created",
+              content: {
+                "application/json": {
+                  schema: { $ref: "#/components/schemas/UserDetailResponse" },
+                },
+              },
+            },
+            400: {
+              description: "Missing required fields",
+              content: {
+                "application/json": {
+                  schema: { $ref: "#/components/schemas/ValidationError" },
+                },
+              },
+            },
+          },
+        },
       },
       "/api/users/{id}": {
         get: {
@@ -241,6 +295,78 @@ const options: swaggerJSDoc.Options = {
               content: {
                 "application/json": {
                   schema: { $ref: "#/components/schemas/UserDetailResponse" },
+                },
+              },
+            },
+            404: {
+              description: "User not found",
+              content: {
+                "application/json": {
+                  schema: { $ref: "#/components/schemas/NotFoundError" },
+                },
+              },
+            },
+          },
+        },
+        put: {
+          tags: ["Users"],
+          summary: "Update a user",
+          description: "Simulates a partial update and returns what the user would look like after the change. Data is not persisted.",
+          parameters: [
+            {
+              name: "id",
+              in: "path",
+              required: true,
+              description: "User ID",
+              schema: { type: "integer", example: 1 },
+            },
+          ],
+          requestBody: {
+            required: true,
+            content: {
+              "application/json": {
+                schema: { $ref: "#/components/schemas/UserUpdateRequest" },
+              },
+            },
+          },
+          responses: {
+            200: {
+              description: "User updated",
+              content: {
+                "application/json": {
+                  schema: { $ref: "#/components/schemas/UserDetailResponse" },
+                },
+              },
+            },
+            404: {
+              description: "User not found",
+              content: {
+                "application/json": {
+                  schema: { $ref: "#/components/schemas/NotFoundError" },
+                },
+              },
+            },
+          },
+        },
+        delete: {
+          tags: ["Users"],
+          summary: "Delete a user",
+          description: "Simulates deleting a user. The record is not actually removed — the list remains unchanged.",
+          parameters: [
+            {
+              name: "id",
+              in: "path",
+              required: true,
+              description: "User ID",
+              schema: { type: "integer", example: 1 },
+            },
+          ],
+          responses: {
+            200: {
+              description: "User deleted",
+              content: {
+                "application/json": {
+                  schema: { $ref: "#/components/schemas/SuccessMessage" },
                 },
               },
             },
