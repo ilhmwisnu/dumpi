@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
-import mapValidationErrors from "../utills/validation_error_mapper";
-import { loginForm, registerForm } from "../utills/validation";
+import mapValidationErrors from "../utils/validation_error_mapper";
+import { loginForm, registerForm } from "../utils/validation";
 
 const authController = {
   login: (req: Request, res: Response) => {
